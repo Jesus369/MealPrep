@@ -5,14 +5,14 @@ import { gql, useMutation } from "@apollo/client";
 const LOGIN_USER = gql`
   mutation LOGIN_USER($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      id
-      firstname
-      username
+      ok
+      token
+      refreshToken
     }
   }
 `;
 
-const LoginForm = () => {
+const LoginForm = ({ setCookies } = this.props) => {
   const [login] = useMutation(LOGIN_USER);
 
   const [values, setValues] = useState({ email: "", password: "" });
@@ -29,7 +29,10 @@ const LoginForm = () => {
     const foundUser = await login({
       variables: { email: email, password: password }
     });
-    console.log(foundUser);
+
+    console.log(foundUser.data.login.token);
+
+    setCookies.set("token", foundUser.data.login.token, { path: "/" });
   };
 
   return (
