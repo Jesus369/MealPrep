@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import decode from "jwt-decode";
 
 import { gql, useMutation } from "@apollo/client";
 
@@ -25,14 +26,12 @@ const LoginForm = ({ setCookies } = this.props) => {
 
   const loginUser = async () => {
     const { email, password } = values;
-
     const foundUser = await login({
       variables: { email: email, password: password }
     });
-
-    console.log(foundUser.data.login.token);
-
     setCookies.set("token", foundUser.data.login.token, { path: "/" });
+    const cookie = setCookies.get("token");
+    console.log(decode(cookie));
   };
 
   return (
