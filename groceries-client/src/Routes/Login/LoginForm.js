@@ -13,26 +13,41 @@ const LOGIN_USER = gql`
 `;
 
 const LoginForm = ({ setCookies, history } = this.props) => {
-  const [login] = useMutation(LOGIN_USER);
+  // Prepping The Mutation
   const [values, setValues] = useState({ email: "", password: "" });
+  const { email, password } = values;
+  const [login, { error, loading, data }] = useMutation(LOGIN_USER, {
+    variables: {
+      email: email,
+      password: password
+    }
+  });
 
+  // Listening To User Input
   const handleInputChange = e => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
 
+  if (data && data.login.ok) {
+    setCookies.set("token", data.login.token, { path: "/" });
+    history.push("/home");
+  }
+
+  if (error) {
+    console.log(error);
+  }
+
+  // Login Function
   const loginUser = async () => {
     const { email, password } = values;
-    const foundUser = await login({
-      variables: { email: email, password: password }
-    });
-
-    if (foundUser.data.login.ok === true) {
-      await setCookies.set("token", foundUser.data.login.token, { path: "/" });
-      await history.push("/home");
-    } else if (null) {
-      console.log("there was an error");
-    }
+    // const foundUser = await login({
+    //   variables: { email: email, password: password }
+    // });
+    // if (foundUser.data.login.ok === true) {
+    //   await setCookies.set("token", foundUser.data.login.token, { path: "/" });
+    //   await history.push("/home");
+    // }
   };
 
   return (
@@ -40,7 +55,7 @@ const LoginForm = ({ setCookies, history } = this.props) => {
       <form
         onSubmit={e => {
           e.preventDefault();
-          loginUser();
+          login();
         }}
       >
         <input
