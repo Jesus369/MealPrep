@@ -14,7 +14,6 @@ const LOGIN_USER = gql`
 
 const LoginForm = ({ setCookies, history } = this.props) => {
   const [login] = useMutation(LOGIN_USER);
-
   const [values, setValues] = useState({ email: "", password: "" });
 
   const handleInputChange = e => {
@@ -27,8 +26,13 @@ const LoginForm = ({ setCookies, history } = this.props) => {
     const foundUser = await login({
       variables: { email: email, password: password }
     });
-    await setCookies.set("token", foundUser.data.login.token, { path: "/" });
-    await history.push("/home");
+
+    if (foundUser.data.login.ok === true) {
+      await setCookies.set("token", foundUser.data.login.token, { path: "/" });
+      await history.push("/home");
+    } else if (null) {
+      console.log("there was an error");
+    }
   };
 
   return (

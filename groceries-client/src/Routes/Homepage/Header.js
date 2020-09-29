@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import decode from "jwt-decode";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 const Header = ({ setCookies } = this.props) => {
   const logout = () => {
@@ -29,8 +29,12 @@ const Header = ({ setCookies } = this.props) => {
           </ul>
         ) : (
           <ul className="acct_details">
-            <li>Register</li>
-            <li>Login</li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
           </ul>
         )}
       </div>
