@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import decode from "jwt-decode";
-
+import { withRouter } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 
 const LOGIN_USER = gql`
@@ -13,13 +12,12 @@ const LOGIN_USER = gql`
   }
 `;
 
-const LoginForm = ({ setCookies } = this.props) => {
+const LoginForm = ({ setCookies, history } = this.props) => {
   const [login] = useMutation(LOGIN_USER);
 
   const [values, setValues] = useState({ email: "", password: "" });
 
   const handleInputChange = e => {
-    const { email, password } = values;
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
@@ -29,15 +27,13 @@ const LoginForm = ({ setCookies } = this.props) => {
     const foundUser = await login({
       variables: { email: email, password: password }
     });
-    setCookies.set("token", foundUser.data.login.token, { path: "/" });
-    const cookie = setCookies.get("token");
-    console.log(decode(cookie));
+    await setCookies.set("token", foundUser.data.login.token, { path: "/" });
+    await history.push("/home");
   };
 
   return (
     <div>
       <form
-        onChange={handleInputChange}
         onSubmit={e => {
           e.preventDefault();
           loginUser();
@@ -46,12 +42,14 @@ const LoginForm = ({ setCookies } = this.props) => {
         <input
           type="text"
           name="email"
+          onChange={handleInputChange}
           value={values.email}
           placeholder="email"
         />
         <input
           type="text"
           name="password"
+          onChange={handleInputChange}
           value={values.password}
           placeholder="password"
         />
@@ -61,4 +59,4 @@ const LoginForm = ({ setCookies } = this.props) => {
   );
 };
 
-export default LoginForm;
+export default withRouter(LoginForm);

@@ -3,7 +3,6 @@ import LoginForm from "./LoginForm";
 
 class Login extends Component {
   render({ cookies } = this.props) {
-    console.log(cookies);
     return (
       <div>
         <LoginForm setCookies={cookies} />

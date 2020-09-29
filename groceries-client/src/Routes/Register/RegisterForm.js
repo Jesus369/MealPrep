@@ -34,7 +34,6 @@ const RegisterForm = () => {
   });
 
   const handleInputChange = e => {
-    const { email, username, password, firstname, lastname } = values;
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };

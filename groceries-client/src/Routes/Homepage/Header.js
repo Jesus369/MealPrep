@@ -1,16 +1,41 @@
 import React, { Component } from "react";
+import decode from "jwt-decode";
+import { withRouter } from "react-router-dom";
 
-class Header extends Component {
-  render() {
-    return (
-      <div className="header">
-        <span className="logo">My Meal Plan</span>
-        <div className="myaccount">
-          <ul className="acct_details">MyAccount</ul>
-        </div>
-      </div>
-    );
+const Header = ({ setCookies } = this.props) => {
+  const logout = () => {
+    setCookies.remove("token", { path: "/" });
+  };
+
+  let user = null;
+  if (setCookies.get("token")) {
+    user = decode(setCookies.get("token")).access;
   }
-}
 
-export default Header;
+  return (
+    <div className="header">
+      <span className="logo">My Meal Plan</span>
+      <div className="myaccount">
+        {user ? (
+          <ul className="acct_details">
+            <li>Account</li>
+            <li
+              onClick={() => {
+                logout();
+              }}
+            >
+              logout
+            </li>
+          </ul>
+        ) : (
+          <ul className="acct_details">
+            <li>Register</li>
+            <li>Login</li>
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default withRouter(Header);

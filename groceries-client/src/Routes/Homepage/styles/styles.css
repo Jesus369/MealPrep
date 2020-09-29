@@ -20,6 +20,7 @@
 
 .acct_details {
   position: absolute;
+  list-style-type: none;
   right: 2em;
 }
 

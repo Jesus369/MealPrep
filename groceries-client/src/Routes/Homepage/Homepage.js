@@ -6,10 +6,10 @@ import AllLists from "./AllLists";
 import "./styles/styles.css";
 
 class Homepage extends Component {
-  render() {
+  render({ cookies } = this.props) {
     return (
       <div className="displayHomepage">
-        <Header />
+        <Header setCookies={cookies} />
         <IntroImgs />
         <AllLists />
         <div></div>
