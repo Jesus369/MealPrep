@@ -17,7 +17,6 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
   if (networkError) {
     // Pushing client(user) to NotFound page
-    this.props.history.push("/network-error");
   }
 });
 

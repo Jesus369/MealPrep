@@ -8,6 +8,7 @@ const LOGIN_USER = gql`
       ok
       token
       refreshToken
+      error
     }
   }
 `;
@@ -29,26 +30,16 @@ const LoginForm = ({ setCookies, history } = this.props) => {
     setValues({ ...values, [name]: value });
   };
 
-  if (data && data.login.ok) {
+  if (data && data.login.ok == false) {
+    console.log("error");
+    console.log(data);
+  }
+
+  if (data && data.login.ok == true) {
+    console.log(data);
     setCookies.set("token", data.login.token, { path: "/" });
     history.push("/home");
   }
-
-  if (error) {
-    console.log(error);
-  }
-
-  // Login Function
-  const loginUser = async () => {
-    const { email, password } = values;
-    // const foundUser = await login({
-    //   variables: { email: email, password: password }
-    // });
-    // if (foundUser.data.login.ok === true) {
-    //   await setCookies.set("token", foundUser.data.login.token, { path: "/" });
-    //   await history.push("/home");
-    // }
-  };
 
   return (
     <div>
