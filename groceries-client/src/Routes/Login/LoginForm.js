@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 
@@ -15,12 +15,27 @@ const LOGIN_USER = gql`
 
 const LoginForm = ({ setCookies, history } = this.props) => {
   // Prepping The Mutation
-  const [values, setValues] = useState({ email: "", password: "" });
+  let loginError = null;
+  let userId = null;
+
+  const [values, setValues] = useState({ email: "", password: "", error: "" });
   const { email, password } = values;
   const [login, { error, loading, data }] = useMutation(LOGIN_USER, {
     variables: {
       email: email,
       password: password
+    }
+  });
+
+  useEffect(() => {
+    if (data) {
+      if (data.login.ok == false) {
+        loginError = data.login.error;
+      }
+      if (data.login.ok == true) {
+        setCookies.set("token", data.login.token, { path: "/" });
+        history.push("/home");
+      }
     }
   });
 
@@ -30,17 +45,6 @@ const LoginForm = ({ setCookies, history } = this.props) => {
     setValues({ ...values, [name]: value });
   };
 
-  if (data && data.login.ok == false) {
-    console.log("error");
-    console.log(data);
-  }
-
-  if (data && data.login.ok == true) {
-    console.log(data);
-    setCookies.set("token", data.login.token, { path: "/" });
-    history.push("/home");
-  }
-
   return (
     <div>
       <form
@@ -49,6 +53,7 @@ const LoginForm = ({ setCookies, history } = this.props) => {
           login();
         }}
       >
+        {values.error}
         <input
           type="text"
           name="email"
@@ -64,6 +69,8 @@ const LoginForm = ({ setCookies, history } = this.props) => {
           placeholder="password"
         />
         <input type="submit" />
+
+        {data && data.login.ok == false ? <div>{data.login.error}</div> : ""}
       </form>
     </div>
   );
