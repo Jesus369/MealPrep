@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Header from "./Header";
+import Header from "../../Components/Header";
 import IntroImgs from "./IntroImgs";
 import AllLists from "./AllLists";
 

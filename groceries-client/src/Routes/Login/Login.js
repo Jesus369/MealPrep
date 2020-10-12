@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import LoginForm from "./LoginForm";
+import Header from "../../Components/Header";
+
+import "./styles/styles.css";
 
 class Login extends Component {
-  render({ cookies } = this.props) {
+  render() {
     return (
       <div>
-        <LoginForm setCookies={cookies} />
+        <Header setCookies={this.props.cookies} />
+        <LoginForm setCookies={this.props.cookies} />
       </div>
     );
   }

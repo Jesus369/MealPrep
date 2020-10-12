@@ -13,7 +13,7 @@ const LOGIN_USER = gql`
   }
 `;
 
-const LoginForm = ({ setCookies, history } = this.props) => {
+const Login = ({ setCookies, history } = this.props) => {
   // Prepping The Mutation
   let loginError = null;
   let userId = null;
@@ -31,8 +31,7 @@ const LoginForm = ({ setCookies, history } = this.props) => {
     if (data) {
       if (data.login.ok == false) {
         loginError = data.login.error;
-      }
-      if (data.login.ok == true) {
+      } else {
         setCookies.set("token", data.login.token, { path: "/" });
         history.push("/home");
       }
@@ -46,34 +45,44 @@ const LoginForm = ({ setCookies, history } = this.props) => {
   };
 
   return (
-    <div>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          login();
-        }}
-      >
-        {values.error}
-        <input
-          type="text"
-          name="email"
-          onChange={handleInputChange}
-          value={values.email}
-          placeholder="email"
-        />
-        <input
-          type="text"
-          name="password"
-          onChange={handleInputChange}
-          value={values.password}
-          placeholder="password"
-        />
-        <input type="submit" />
+    <div className="form_page">
+      <div>
+        <form
+          className="login_form"
+          onSubmit={e => {
+            e.preventDefault();
+            login();
+          }}
+        >
+          <a>Login</a>
+          {values.error}
+          <input
+            type="text"
+            name="email"
+            onChange={handleInputChange}
+            value={values.email}
+            placeholder="EMAIL"
+          />
+          <div></div>
+          <input
+            type="text"
+            name="password"
+            onChange={handleInputChange}
+            value={values.password}
+            placeholder="PASSWORD"
+          />
+          <div></div>
+          <button>SUBMIT</button>
 
-        {data && data.login.ok == false ? <div>{data.login.error}</div> : ""}
-      </form>
+          {data && data.login.ok == false ? (
+            <span>{data.login.error}</span>
+          ) : (
+            ""
+          )}
+        </form>
+      </div>
     </div>
   );
 };
 
-export default withRouter(LoginForm);
+export default withRouter(Login);

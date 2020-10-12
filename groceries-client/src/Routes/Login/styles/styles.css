@@ -1,0 +1,68 @@
+.form_page {
+  position: relative;
+  width: 100%;
+  margin: 0;
+}
+
+.form_page > div {
+  margin-top: 5em;
+  width: 50%;
+  transform: translateX(50%);
+}
+
+.login_form {
+  font-family: "Avenir Next Condensed";
+  border: 1px solid rgb(206, 206, 206);
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  transform: translateX(50%);
+  height: 20em;
+  align-items: center;
+  font-size: 1.3em;
+}
+
+.login_form > a {
+  margin-bottom: 10px;
+}
+
+.login_form > div {
+  background-color: rgb(206, 206, 206);
+  height: 1px;
+  width: 50%;
+}
+
+.login_form > input {
+  font-family: "Avenir Next Condensed";
+  border: hidden;
+  margin-top: 1px;
+  padding: 3px;
+  width: 50%;
+}
+
+.login_form > input:focus {
+  outline: none;
+}
+
+.login_form > button {
+  font-family: "Avenir Next Condensed";
+  border-radius: 3px;
+  border: solid 1px rgb(206, 206, 206);
+  background-color: rgb(255, 255, 255);
+  margin-top: 1px;
+  padding: 3px;
+  width: 50%;
+}
+
+.login_form > button:active {
+  border-radius: 3px;
+  border: solid 1.3px rgb(206, 206, 206);
+}
+
+.login_form > button:focus {
+  outline: none;
+}
+
+.login_form > span {
+  margin-top: 10px;
+}
