@@ -21,7 +21,10 @@ class Routes extends Component {
             path="/login"
             render={() => <Login cookies={this.props.cookies} />}
           />
-          <Route path="/register" component={Register} />
+          <Route
+            path="/register"
+            render={() => <Register cookies={this.props.cookies} />}
+          />
           <Route path="*" component={NotFound} />
         </Switch>
       </Router>

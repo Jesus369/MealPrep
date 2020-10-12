@@ -53,47 +53,55 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="main">
-      <form
-        onChange={handleInputChange}
-        className="form"
-        onSubmit={e => {
-          e.preventDefault();
-          register();
-        }}
-      >
-        <input
-          name="email"
-          type="text"
-          value={values.email}
-          placeholder="Email"
-        />
-        <input
-          name="username"
-          type="text"
-          value={values.username}
-          placeholder="Username"
-        />
-        <input
-          name="password"
-          type="text"
-          value={values.password}
-          placeholder="Password"
-        />
-        <input
-          name="firstname"
-          type="text"
-          value={values.firstname}
-          placeholder="Firstname"
-        />
-        <input
-          name="lastname"
-          type="text"
-          value={values.lastname}
-          placeholder="Lastname"
-        />
-        <input type="submit" placeholder="Submit" />
-      </form>
+    <div className="form_page">
+      <div>
+        <form
+          className="register_form"
+          onChange={handleInputChange}
+          onSubmit={e => {
+            e.preventDefault();
+            register();
+          }}
+        >
+          <a>REGISTER</a>
+          <input
+            name="email"
+            type="text"
+            value={values.email}
+            placeholder="Email"
+          />
+          <div></div>
+          <input
+            name="username"
+            type="text"
+            value={values.username}
+            placeholder="Username"
+          />
+          <div></div>
+          <input
+            name="password"
+            type="text"
+            value={values.password}
+            placeholder="Password"
+          />
+          <div></div>
+          <input
+            name="firstname"
+            type="text"
+            value={values.firstname}
+            placeholder="Firstname"
+          />
+          <div></div>
+          <input
+            name="lastname"
+            type="text"
+            value={values.lastname}
+            placeholder="Lastname"
+          />
+          <div></div>
+          <button>SUBMIT</button>
+        </form>
+      </div>
     </div>
   );
 };

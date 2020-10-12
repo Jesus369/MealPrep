@@ -54,7 +54,7 @@ const Login = ({ setCookies, history } = this.props) => {
             login();
           }}
         >
-          <a>Login</a>
+          <a>LOGIN</a>
           {values.error}
           <input
             type="text"
