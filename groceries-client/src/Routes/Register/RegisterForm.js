@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { gql, useMutation } from "@apollo/client";
 
@@ -18,13 +18,12 @@ const REGISTER_USER = gql`
       lastname: $lastname
     ) {
       ok
+      error
     }
   }
 `;
 
 const RegisterForm = () => {
-  const [registerUser] = useMutation(REGISTER_USER);
-
   const [values, setValues] = useState({
     email: "",
     username: "",
@@ -32,25 +31,37 @@ const RegisterForm = () => {
     firstname: "",
     lastname: ""
   });
+  const { email, username, password, firstname, lastname } = values;
+  const [registerUser, { error, loading, data }] = useMutation(REGISTER_USER, {
+    variables: {
+      email: email,
+      username: username,
+      password: password,
+      firstname: firstname,
+      lastname: lastname
+    }
+  });
 
   const handleInputChange = e => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
 
-  const register = async () => {
-    const { email, username, password, firstname, lastname } = values;
+  // const register = async () => {
+  //   const { email, username, password, firstname, lastname } = values;
 
-    await registerUser({
-      variables: {
-        email: email,
-        username: username,
-        password: password,
-        firstname: firstname,
-        lastname: lastname
-      }
-    });
-  };
+  //   const data = await registerUser({
+  //     variables: {
+  //       email: email,
+  //       username: username,
+  //       password: password,
+  //       firstname: firstname,
+  //       lastname: lastname
+  //     }
+  //   });
+
+  //   console.log(data);
+  // };
 
   return (
     <div className="form_page">
@@ -60,7 +71,7 @@ const RegisterForm = () => {
           onChange={handleInputChange}
           onSubmit={e => {
             e.preventDefault();
-            register();
+            registerUser();
           }}
         >
           <a>REGISTER</a>
@@ -70,36 +81,43 @@ const RegisterForm = () => {
             value={values.email}
             placeholder="Email"
           />
-          <div></div>
+          <div className="div_line"></div>
           <input
             name="username"
             type="text"
             value={values.username}
             placeholder="Username"
           />
-          <div></div>
+          <div className="div_line"></div>
           <input
             name="password"
             type="text"
             value={values.password}
             placeholder="Password"
           />
-          <div></div>
+          <div className="div_line"></div>
           <input
             name="firstname"
             type="text"
             value={values.firstname}
             placeholder="Firstname"
           />
-          <div></div>
+          <div className="div_line"></div>
           <input
             name="lastname"
             type="text"
             value={values.lastname}
             placeholder="Lastname"
           />
-          <div></div>
-          <button>SUBMIT</button>
+          <button>SUBMIT</button>{" "}
+          <div className="register_error">
+            {" "}
+            {data && data.registerUser.ok == false ? (
+              <span className="error_text"> {data.registerUser.error} </span>
+            ) : (
+              ""
+            )}{" "}
+          </div>
         </form>
       </div>
     </div>

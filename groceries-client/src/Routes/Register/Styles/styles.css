@@ -11,6 +11,7 @@
 }
 
 .register_form {
+  justify-content: center;
   font-family: "Avenir Next Condensed";
   border: 1px solid rgb(206, 206, 206);
   display: flex;
@@ -26,7 +27,7 @@
   margin-bottom: 10px;
 }
 
-.register_form > div {
+.div_line {
   background-color: rgb(206, 206, 206);
   height: 1px;
   width: 50%;
@@ -63,6 +64,7 @@
   outline: none;
 }
 
-.register_form > span {
-  margin-top: 10px;
+.register_error {
+  text-align: center;
+  margin-top: 1em;
 }
