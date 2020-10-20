@@ -6,6 +6,7 @@ import { withCookies } from "react-cookie";
 import Homepage from "./Homepage/Homepage";
 import Register from "./Register/Register";
 import Login from "./Login/Login";
+import Account from "./User/Account";
 import NotFound from "./NotFound/NotFound";
 
 class Routes extends Component {
@@ -25,6 +26,7 @@ class Routes extends Component {
             path="/register"
             render={() => <Register cookies={this.props.cookies} />}
           />
+          <Route path="/account/:userId" component={Account} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Router>
