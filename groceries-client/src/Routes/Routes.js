@@ -8,9 +8,15 @@ import Register from "./Register/Register";
 import Login from "./Login/Login";
 import Account from "./User/Account";
 import NotFound from "./NotFound/NotFound";
+import decode from "jwt-decode";
 
 class Routes extends Component {
   render() {
+    let userId = null;
+    if (this.props.cookies.get("token")) {
+      userId = decode(this.props.cookies.get("token")).access.id;
+    }
+
     return (
       <Router>
         <Switch>
@@ -26,7 +32,18 @@ class Routes extends Component {
             path="/register"
             render={() => <Register cookies={this.props.cookies} />}
           />
-          <Route path="/account/:userId" component={Account} />
+          <Route
+            path="/account/:userId"
+            render={props => (
+              <Account
+                userId={userId}
+                cookies={this.props.cookies}
+                id={props.match.params.userId}
+                {...this.props}
+                {...props}
+              />
+            )}
+          />
           <Route path="*" component={NotFound} />
         </Switch>
       </Router>
