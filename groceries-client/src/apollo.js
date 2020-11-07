@@ -13,6 +13,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
       console.log(
         `[GraphQL error]: Message: ${message}, Location: ${extensions.code}`
       );
+      return null;
     });
   }
   if (networkError) {

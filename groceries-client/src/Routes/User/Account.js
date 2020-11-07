@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import Header from "../../Components/Header";
 import GroceryListDisplay from "./GroceryListDisplay";
@@ -6,7 +6,6 @@ import GroceryListDisplay from "./GroceryListDisplay";
 import { withRouter } from "react-router-dom";
 
 import { gql, useQuery } from "@apollo/client";
-import { render } from "react-dom";
 
 const FETCH_USER = gql`
   query FETCH_USER($id: Int!) {
@@ -29,7 +28,8 @@ const Account = (
 
   if (loading) return <div>...Loading Data</div>;
 
-  if (userId != parseInt(params.userId)) {
+  //   Push user home if Account Page ParamsID does not = to logged in UserID
+  if (userId !== parseInt(params.userId)) {
     history.push("/home");
   }
   return (

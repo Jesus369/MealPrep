@@ -16,11 +16,10 @@ const LOGIN_USER = gql`
 const Login = ({ setCookies, history } = this.props) => {
   // Prepping The Mutation
   let loginError = null;
-  let userId = null;
 
   const [values, setValues] = useState({ email: "", password: "", error: "" });
   const { email, password } = values;
-  const [login, { error, loading, data }] = useMutation(LOGIN_USER, {
+  const [login, { data }] = useMutation(LOGIN_USER, {
     variables: {
       email: email,
       password: password
@@ -29,7 +28,7 @@ const Login = ({ setCookies, history } = this.props) => {
 
   useEffect(() => {
     if (data) {
-      if (data.login.ok == false) {
+      if (data.login.ok === false) {
         loginError = data.login.error;
       } else {
         setCookies.set("token", data.login.token, { path: "/" });
@@ -54,7 +53,7 @@ const Login = ({ setCookies, history } = this.props) => {
             login();
           }}
         >
-          <a>LOGIN</a>
+          <span>LOGIN</span>
           {values.error}
           <input
             type="text"
@@ -74,7 +73,7 @@ const Login = ({ setCookies, history } = this.props) => {
           <div></div>
           <button>SUBMIT</button>
 
-          {data && data.login.ok == false ? (
+          {data && data.login.ok === false ? (
             <span>{data.login.error}</span>
           ) : (
             ""

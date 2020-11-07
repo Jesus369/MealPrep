@@ -19,7 +19,7 @@ const AllLists = () => {
   return (
     <div>
       {data.meals.map(m => (
-        <div>{m.name}</div>
+        <div key={"food " + m.id}>{m.name}</div>
       ))}
     </div>
   );

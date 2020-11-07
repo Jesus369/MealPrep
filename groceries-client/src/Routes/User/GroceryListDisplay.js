@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import { gql, useQuery } from "@apollo/client";
 
@@ -21,7 +21,7 @@ const GroceryListDisplay = ({ userId } = this.props) => {
 
   return (
     <div>
-      {data.lists.length == 0 ? (
+      {data.lists.length === 0 ? (
         <div>Build Your Meals!</div>
       ) : (
         data.lists.map(d => <div>{d.name}</div>)

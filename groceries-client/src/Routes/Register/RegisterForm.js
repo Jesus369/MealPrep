@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { gql, useMutation } from "@apollo/client";
 
@@ -32,7 +32,7 @@ const RegisterForm = () => {
     lastname: ""
   });
   const { email, username, password, firstname, lastname } = values;
-  const [registerUser, { error, loading, data }] = useMutation(REGISTER_USER, {
+  const [registerUser, { data }] = useMutation(REGISTER_USER, {
     variables: {
       email: email,
       username: username,
@@ -47,38 +47,22 @@ const RegisterForm = () => {
     setValues({ ...values, [name]: value });
   };
 
-  // const register = async () => {
-  //   const { email, username, password, firstname, lastname } = values;
-
-  //   const data = await registerUser({
-  //     variables: {
-  //       email: email,
-  //       username: username,
-  //       password: password,
-  //       firstname: firstname,
-  //       lastname: lastname
-  //     }
-  //   });
-
-  //   console.log(data);
-  // };
-
   return (
     <div className="form_page">
       <div>
         <form
           className="register_form"
-          onChange={handleInputChange}
           onSubmit={e => {
             e.preventDefault();
             registerUser();
           }}
         >
-          <a>REGISTER</a>
+          <span>REGISTER</span>
           <input
             name="email"
             type="text"
             value={values.email}
+            onChange={handleInputChange}
             placeholder="Email"
           />
           <div className="div_line"></div>
@@ -86,6 +70,7 @@ const RegisterForm = () => {
             name="username"
             type="text"
             value={values.username}
+            onChange={handleInputChange}
             placeholder="Username"
           />
           <div className="div_line"></div>
@@ -93,6 +78,7 @@ const RegisterForm = () => {
             name="password"
             type="text"
             value={values.password}
+            onChange={handleInputChange}
             placeholder="Password"
           />
           <div className="div_line"></div>
@@ -100,6 +86,7 @@ const RegisterForm = () => {
             name="firstname"
             type="text"
             value={values.firstname}
+            onChange={handleInputChange}
             placeholder="Firstname"
           />
           <div className="div_line"></div>
@@ -107,12 +94,13 @@ const RegisterForm = () => {
             name="lastname"
             type="text"
             value={values.lastname}
+            onChange={handleInputChange}
             placeholder="Lastname"
           />
           <button>SUBMIT</button>{" "}
           <div className="register_error">
             {" "}
-            {data && data.registerUser.ok == false ? (
+            {data && data.registerUser.ok === false ? (
               <span className="error_text"> {data.registerUser.error} </span>
             ) : (
               ""

@@ -18,7 +18,9 @@ const Header = ({ setCookies } = this.props) => {
       <div className="myaccount">
         {user ? (
           <ul className="acct_details">
-            <li>Account</li>
+            <li>
+              <Link to={"/account/" + user.id}>Account</Link>
+            </li>
             <li
               onClick={() => {
                 logout();
