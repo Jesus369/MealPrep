@@ -14,7 +14,7 @@ const LOGIN_USER = gql`
 `;
 
 const Login = ({ setCookies, history } = this.props) => {
-  // Prepping The Mutation
+  // Mutation Process
   let loginError = null;
 
   const [values, setValues] = useState({ email: "", password: "", error: "" });

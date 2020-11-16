@@ -9,7 +9,7 @@ class Register extends Component {
     return (
       <div>
         <Header setCookies={this.props.cookies} />
-        <RegisterForm />
+        <RegisterForm setCookies={this.props.cookies} />
       </div>
     );
   }

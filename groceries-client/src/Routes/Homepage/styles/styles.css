@@ -1,6 +1,6 @@
 .header {
-  background-color: #f38b8b;
-  color: white;
+  background-color: #ffffff;
+  color: rgb(255, 176, 30);
   width: 100%;
   position: relative;
 }
@@ -8,7 +8,7 @@
 .logo {
   font-size: 2em;
   font-weight: bold;
-  font-style: oblique;
+  font-family: "Klavika";
   position: absolute;
   left: 50%;
   top: 50%;
@@ -25,7 +25,7 @@
 }
 
 .acct_details > li > a {
-  color: white;
+  color: rgb(255, 176, 30);
   text-decoration: none;
 }
 
@@ -47,4 +47,92 @@
 
 .img_logo {
   height: 10em;
+}
+
+.introduction_active {
+  position: relative;
+  color: white;
+  background-color: rgb(255, 107, 70);
+  height: 70vh;
+}
+
+.introduction_active > div {
+  font-family: "Klavika";
+  text-align: center;
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+.lets_get_it {
+  font-size: 5em;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.lets_get_it:hover {
+  background-color: rgb(221, 164, 131);
+}
+
+.lets_get_it > a {
+  color: rgb(199, 199, 181);
+  text-decoration: none;
+}
+
+.introduction_active > div > ul {
+  padding: 0;
+  margin: 0;
+}
+
+.introduction_active > div > ul > li {
+  font-size: 2em;
+  display: inline;
+  margin: 0 10px;
+  padding: 5px;
+}
+
+.introduction_active > div > ul > li:hover {
+  background-color: rgb(221, 164, 131);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+/* Inactive Login */
+.introduction_inactive {
+  position: relative;
+  color: white;
+  background-color: rgb(255, 107, 70);
+  height: 70vh;
+}
+
+.introduction_inactive > div {
+  font-family: "Klavika";
+  text-align: center;
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+.introduction_inactive > div > div > span {
+  font-size: 5em;
+}
+
+.introduction_inactive > div > div > ul {
+  padding: 0;
+  margin: 0;
+}
+
+.introduction_inactive > div > div > ul > li {
+  font-size: 2em;
+  display: inline;
+  margin: 0 10px;
+  padding: 5px;
+}
+
+.introduction_inactive > div > div > ul > li:hover {
+  background-color: rgb(250, 194, 180);
 }

@@ -21,7 +21,7 @@ const GroceryListDisplay = ({ userId } = this.props) => {
 
   return (
     <div>
-      {data.lists.length === 0 ? (
+      {!data.lists || data.lists.length === 0 ? (
         <div>Build Your Meals!</div>
       ) : (
         data.lists.map(d => <div>{d.name}</div>)

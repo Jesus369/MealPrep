@@ -1,11 +1,14 @@
 import React from "react";
 
+import { withRouter } from "react-router-dom";
+import { gql, useQuery } from "@apollo/client";
+
 import Header from "../../Components/Header";
 import GroceryListDisplay from "./GroceryListDisplay";
+import Calendar from "./Calendar";
+import Meals from "./Meals";
 
-import { withRouter } from "react-router-dom";
-
-import { gql, useQuery } from "@apollo/client";
+import "./Styles/styles.css";
 
 const FETCH_USER = gql`
   query FETCH_USER($id: Int!) {
@@ -13,6 +16,7 @@ const FETCH_USER = gql`
       email
       firstname
       lastname
+      meals
     }
   }
 `;
@@ -35,18 +39,8 @@ const Account = (
   return (
     <div>
       <Header setCookies={cookies} />
-      <ul>
-        <li> {data.user.email} </li>
-        <li> {data.user.firstname} </li>
-        <li> {data.user.lastname} </li>
-      </ul>
-
-      <div>
-        <ul>
-          <li>Grocery List</li>
-          <li>Meals</li>
-        </ul>
-      </div>
+      <Calendar />
+      <Meals />
 
       <div>
         <GroceryListDisplay userId={parseInt(params.userId)} />

@@ -16,6 +16,10 @@ const AllLists = () => {
   });
 
   if (loading) return <div>...Loading Data</div>;
+
+  if (!data.meals) {
+    return <div>No Data To Load</div>;
+  }
   return (
     <div>
       {data.meals.map(m => (
