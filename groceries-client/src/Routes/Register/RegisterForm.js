@@ -1,4 +1,4 @@
-import React, { useState, useEfect, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { gql, useMutation } from "@apollo/client";
 import { withRouter } from "react-router-dom";

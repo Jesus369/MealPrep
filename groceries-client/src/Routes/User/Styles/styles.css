@@ -16,13 +16,17 @@
 }
 
 .meals_container {
-  background-color: rgb(255, 215, 104);
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   height: 50vh;
   position: relative;
 }
 
 .meals_container > div {
   font-family: "Klavika";
+}
+
+.empty_meals {
   text-align: center;
   position: absolute;
   -webkit-transform: translate(-50%, -50%);
@@ -30,4 +34,13 @@
   top: 50%;
   left: 50%;
   font-size: 4em;
+}
+
+.meals_listing {
+}
+
+.meals_listing > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }

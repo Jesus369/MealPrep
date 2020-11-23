@@ -16,7 +16,9 @@ const FETCH_USER = gql`
       email
       firstname
       lastname
-      meals
+      meals {
+        name
+      }
     }
   }
 `;
@@ -36,17 +38,22 @@ const Account = (
   if (userId !== parseInt(params.userId)) {
     history.push("/home");
   }
-  return (
-    <div>
-      <Header setCookies={cookies} />
-      <Calendar />
-      <Meals />
 
+  if (data) {
+    return (
       <div>
-        <GroceryListDisplay userId={parseInt(params.userId)} />
+        <Header setCookies={cookies} />
+        <Calendar />
+        <div className="meals_container">
+          <Meals meals={data.user.meals} />
+        </div>
+
+        <div>
+          <GroceryListDisplay userId={parseInt(params.userId)} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default withRouter(Account);
