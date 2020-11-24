@@ -18,6 +18,7 @@ const FETCH_USER = gql`
       lastname
       meals {
         name
+        photo
       }
     }
   }
@@ -43,7 +44,6 @@ const Account = (
     return (
       <div>
         <Header setCookies={cookies} />
-        <Calendar />
         <div className="meals_container">
           <Meals meals={data.user.meals} />
         </div>

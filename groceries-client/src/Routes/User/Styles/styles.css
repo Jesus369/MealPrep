@@ -19,6 +19,7 @@
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
   height: 50vh;
+  margin: 4em 0;
   position: relative;
 }
 
@@ -37,10 +38,16 @@
 }
 
 .meals_listing {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .meals_listing > ul {
+  text-align: center;
   list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding: 1em;
+  width: 22.7%;
 }

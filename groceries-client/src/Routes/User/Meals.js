@@ -7,7 +7,8 @@ const Meals = ({ meals } = this.props) => {
   return (
     <div className="meals_listing">
       {meals.map(m => (
-        <ul>
+        <ul className="meal">
+          <li>{m.photo}</li>
           <li>{m.name}</li>
         </ul>
       ))}
