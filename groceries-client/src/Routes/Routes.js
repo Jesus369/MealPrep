@@ -8,6 +8,7 @@ import Register from "./Register/Register";
 import Login from "./Login/Login";
 import Account from "./User/Account";
 import NotFound from "./NotFound/NotFound";
+import AddGroceries from "./AddGroceries/AddGroceries";
 import decode from "jwt-decode";
 
 class Routes extends Component {
@@ -44,6 +45,7 @@ class Routes extends Component {
               />
             )}
           />
+          <Route path="/groceries/:userId" render={props => <AddGroceries />} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Router>

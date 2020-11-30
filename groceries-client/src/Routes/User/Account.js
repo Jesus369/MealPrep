@@ -20,6 +20,9 @@ const FETCH_USER = gql`
         name
         photo
       }
+      lists {
+        name
+      }
     }
   }
 `;
@@ -45,11 +48,11 @@ const Account = (
       <div>
         <Header setCookies={cookies} />
         <div className="meals_container">
-          <Meals meals={data.user.meals} />
+          <Meals meals={data.user.meals} userId={parseInt(params.userId)} />
         </div>
 
-        <div>
-          <GroceryListDisplay userId={parseInt(params.userId)} />
+        <div className="groceries_container">
+          <GroceryListDisplay lists={data.user.lists} userId={params.userId} />
         </div>
       </div>
     );

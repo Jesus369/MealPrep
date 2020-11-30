@@ -1,50 +1,90 @@
-.calendar_container {
-  background-color: rgb(255, 107, 70);
-  height: 50vh;
-  position: relative;
-}
-
-.calendar_container > div {
-  font-family: "Klavika";
-  text-align: center;
-  position: absolute;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  font-size: 4em;
-}
-
 .meals_container {
-  background-color: rgb(255, 255, 255);
+  background-color: #ffaf81;
   color: rgb(0, 0, 0);
   height: 50vh;
-  margin: 4em 0;
   position: relative;
 }
 
 .meals_container > div {
   font-family: "Klavika";
-}
-
-.empty_meals {
   text-align: center;
   position: absolute;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
-  font-size: 4em;
+  width: 100%;
+}
+
+.empty_meals {
+  color: black;
+  text-align: center;
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  font-size: 2em;
 }
 
 .meals_listing {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
+  height: 50vh;
 }
 
 .meals_listing > ul {
+  text-align: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 1em;
+  width: 22.7%;
+}
+.meals_listing > div {
+  text-align: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 1em;
+  width: 22.7%;
+}
+
+.groceries_container {
+  background-color: #b9fbc4;
+  color: rgb(0, 0, 0);
+  position: relative;
+  height: 50vh;
+}
+
+.empty_groceries {
+  text-align: center;
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  font-size: 2em;
+}
+
+.groceries_container > div {
+  font-family: "Klavika";
+  text-align: center;
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  width: 100%;
+}
+
+.groceries_prelist {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 50vh;
+}
+
+.groceries_prelist > ul {
   text-align: center;
   list-style-type: none;
   margin: 0;

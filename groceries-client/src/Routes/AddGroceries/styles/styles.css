@@ -1,0 +1,8 @@
+.sortby {
+  display: flex;
+  flex-direction: row;
+}
+
+.sortby > ul {
+  list-style-type: none;
+}
