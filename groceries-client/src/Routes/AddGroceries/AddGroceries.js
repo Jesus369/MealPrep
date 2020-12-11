@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { gql, useLazyQuery, useQuery } from "@apollo/client";
 import "./styles/styles.css";
+
 const FETCH_GROCERIES = gql`
   query FETCH_GROCERIES($category: String!) {
     groceriesCat(category: $category) {
@@ -9,9 +10,18 @@ const FETCH_GROCERIES = gql`
   }
 `;
 
+const ALL_GROCERIES = gql`
+  query ALL_GROCERIES {
+    groceries {
+      name
+    }
+  }
+`;
+
 const AddGroceries = () => {
-  let selectedCat = "Vegetable";
-  const [getCat, { loading, data }] = useLazyQuery(FETCH_GROCERIES);
+  const [getCat, categoryData] = useLazyQuery(FETCH_GROCERIES);
+  const { data = [], loading } = useQuery(ALL_GROCERIES);
+  const [getBoolean, setBoolean] = useState({ boolean: true });
 
   let categories = [
     { name: "All" },
@@ -23,7 +33,7 @@ const AddGroceries = () => {
     { name: "Bakery" }
   ];
 
-  if (loading) return <div>Loading The Groceries</div>;
+  if (loading || categoryData.loading) return <div>Loading Groceries</div>;
 
   return (
     <div>
@@ -32,9 +42,13 @@ const AddGroceries = () => {
           <ul>
             <li
               onClick={() => {
-                console.log(c.name);
-                getCat({ variables: { category: c.name } });
-                console.log(data);
+                if (c.name === "All") {
+                  setBoolean({ boolean: true });
+                } else {
+                  setBoolean({ boolean: false });
+                  getCat({ variables: { category: c.name } });
+                  console.log(categoryData.data);
+                }
               }}
             >
               {" "}
@@ -44,15 +58,17 @@ const AddGroceries = () => {
         ))}
       </div>
       <div className="select_groceries">
-        {data && data.groceriesCat ? (
-          data.groceriesCat.map(g => (
-            <ul>
-              <li>{g.name} </li>
-            </ul>
-          ))
-        ) : (
-          <div>NoPets</div>
-        )}
+        {categoryData.data && getBoolean.boolean === false
+          ? categoryData.data.groceriesCat.map(g => (
+              <ul>
+                <li>{g.name} </li>
+              </ul>
+            ))
+          : data.groceries.map(grocery => (
+              <ul>
+                <li> {grocery.name} </li>
+              </ul>
+            ))}
       </div>
     </div>
   );
