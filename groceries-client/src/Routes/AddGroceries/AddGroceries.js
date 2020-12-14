@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { gql, useLazyQuery, useQuery, useMutation } from "@apollo/client";
 import "./styles/styles.css";
+import decode from "jwt-decode";
 
 const FETCH_GROCERIES = gql`
   query FETCH_GROCERIES($category: String!) {
@@ -21,31 +22,26 @@ const ALL_GROCERIES = gql`
 `;
 
 const USER_ADDS_GROCERY = gql`
-  mutation USER_ADDS_GROCERY($listId: Int!, $itemId: Int!) {
-    addedGrocery(listId: $listId, itemId: $itemId) {
+  mutation USER_ADDS_GROCERY($userId: Int!, $itemId: Int!) {
+    addedGrocery(userId: $userId, itemId: $itemId) {
       ok
     }
   }
 `;
 
-const AddGroceries = () => {
+const AddGroceries = ({ cookies } = this.props) => {
   const [getCat, categoryData] = useLazyQuery(FETCH_GROCERIES);
   const { data = [], loading } = useQuery(ALL_GROCERIES);
   const [getBoolean, setBoolean] = useState({ boolean: true });
 
   const [groceryValues, setGroceryValues] = useState({
-    listId: 0,
+    userId: 0,
     itemId: 0
   });
 
   //   Adding a grocery item to the user's list
   const { listId, itemId } = groceryValues;
-  const [addedGrocery, { mutationData }] = useMutation(USER_ADDS_GROCERY, {
-    variables: {
-      listId: listId,
-      itemId: itemId
-    }
-  });
+  const [addedGrocery, { mutationData }] = useMutation(USER_ADDS_GROCERY);
 
   let categories = [
     { name: "All" },
@@ -58,12 +54,13 @@ const AddGroceries = () => {
   ];
 
   if (loading || categoryData.loading) return <div>Loading Groceries</div>;
+  let userId = decode(cookies.get("token")).access.id;
 
   return (
     <div>
       <div className="sortby">
         {categories.map(c => (
-          <ul>
+          <ul key={c.name}>
             <li
               onClick={() => {
                 if (c.name === "All") {
@@ -84,29 +81,26 @@ const AddGroceries = () => {
       <div className="select_groceries">
         {categoryData.data && getBoolean.boolean === false
           ? categoryData.data.groceriesCat.map(g => (
-              <ul>
+              <ul key={g.id}>
+                <li>{g.name} </li>
                 <li
                   onClick={() => {
-                    let groceryId = g.id;
-                    console.log(groceryId);
+                    console.log("action fired");
+                    addedGrocery({
+                      variables: {
+                        userId: userId,
+                        itemId: parseInt(g.id)
+                      }
+                    });
                   }}
                 >
-                  {g.name}{" "}
+                  Add Item{" "}
                 </li>
-                <li onClick={() => {}}>Add Item </li>
               </ul>
             ))
           : data.groceries.map(grocery => (
-              <ul>
-                <li
-                  onClick={() => {
-                    let groceryId = grocery.id;
-                    console.log(groceryId);
-                  }}
-                >
-                  {" "}
-                  {grocery.name}{" "}
-                </li>
+              <ul key={grocery.id}>
+                <li> {grocery.name} </li>
                 <li>Add Item</li>
               </ul>
             ))}

@@ -45,7 +45,10 @@ class Routes extends Component {
               />
             )}
           />
-          <Route path="/groceries/:userId" render={props => <AddGroceries />} />
+          <Route
+            path="/groceries/:userId"
+            render={props => <AddGroceries cookies={this.props.cookies} />}
+          />
           <Route path="*" component={NotFound} />
         </Switch>
       </Router>

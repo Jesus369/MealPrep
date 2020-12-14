@@ -3,7 +3,7 @@ import { createHttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:8081/graphql"
+  uri: "http://localhost:8082/graphql"
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
@@ -24,12 +24,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 const client = new ApolloClient({
   ssrMode: true,
   link: errorLink.concat(httpLink),
-  cache: new InMemoryCache(),
-  defaultOptions: {
-    query: {
-      fetchPolicy: "network-only"
-    }
-  }
+  cache: new InMemoryCache()
 });
 
 export default client;
