@@ -18,25 +18,32 @@ module.exports = {
   Mutation: {
     addedGrocery: async (parent, args, { models }) => {
       try {
-        console.log("logging");
         const usersPrmryLst = await models.User.findOne({
           include: {
             model: models.List,
             as: "lists",
-            where: { name: "Primary" }
+            where: { name: "Vegan" },
+            required: true
           },
-          where: { id: args.userId }
+          where: { id: args.userId },
+          required: false
         });
-        let usersPrmryLstId = usersPrmryLst.lists[0].dataValues.id;
-        console.log(usersPrmryLstId);
-        if (usersPrmryLstId) {
-          console.log("Creating");
+
+        console.log(usersPrmryLst);
+
+        if (usersPrmryLst) {
+          const usersPrmryLstId = usersPrmryLst.lists[0].dataValues.id;
+          console.log("Adding grocery to list");
           await models.ListGroceries.create({
             listId: usersPrmryLstId,
             itemId: args.itemId
           });
-        } else if (!usersPrmryLstId) {
-          console.log("No List");
+        } else {
+          console.log("Creating list");
+          const newList = await models.List.create({
+            name: "Vegan",
+            userId: args.userId
+          });
         }
 
         return {
