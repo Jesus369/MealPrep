@@ -4,7 +4,10 @@ module.exports = {
   Query: {
     grocery: async (parent, args, { models }) => {
       // userId();
-      return await models.Groceries.findOne({ where: { id: args.id } });
+      return await models.Groceries.findOne({
+        include: [{ model: models.Meal }],
+        where: { id: args.id }
+      });
     },
     groceries: async (parent, args, { models }) =>
       await models.Groceries.findAll({ order: ["category"] }),
@@ -22,26 +25,23 @@ module.exports = {
           include: {
             model: models.List,
             as: "lists",
-            where: { name: "Vegan" },
+            where: { name: "Primary" },
             required: true
           },
           where: { id: args.userId },
           required: false
         });
 
-        console.log(usersPrmryLst);
-
         if (usersPrmryLst) {
           const usersPrmryLstId = usersPrmryLst.lists[0].dataValues.id;
-          console.log("Adding grocery to list");
+
           await models.ListGroceries.create({
             listId: usersPrmryLstId,
             itemId: args.itemId
           });
         } else {
-          console.log("Creating list");
-          const newList = await models.List.create({
-            name: "Vegan",
+          await models.List.create({
+            name: "Primary",
             userId: args.userId
           });
         }

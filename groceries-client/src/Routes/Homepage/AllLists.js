@@ -1,5 +1,6 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
+import { Link } from "react-router-dom";
 
 const FETCH_MEALS = gql`
   query FETCH_MEALS {
@@ -22,8 +23,10 @@ const AllLists = () => {
   }
   return (
     <div>
-      {data.meals.map(m => (
-        <div key={"food " + m.id}>{m.name}</div>
+      {data.meals.map(meal => (
+        <Link to={"/" + meal.name + "/" + meal.id} key={"food " + meal.id}>
+          {meal.name}
+        </Link>
       ))}
     </div>
   );

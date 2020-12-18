@@ -12,9 +12,10 @@ const models = {
   User: sequelize.import("./user"),
   Groceries: sequelize.import("./groceries"),
   List: sequelize.import("./list"),
-  ListGroceries: sequelize.import("./listgroceries"),
   Meal: sequelize.import("./meal"),
-  UserMeals: sequelize.import("./usermeals")
+  ListGroceries: sequelize.import("./listgroceries"),
+  UserMeals: sequelize.import("./usermeals"),
+  MealItems: sequelize.import("./mealitems")
 };
 
 Object.keys(models).forEach(key => {

@@ -8,6 +8,7 @@ export default `
         protein: Int!
         fat: Int!
         sugar: Int!
+        meals: [Meal!]!
     }
 
     type Query {

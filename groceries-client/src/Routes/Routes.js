@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { withCookies } from "react-cookie";
+import decode from "jwt-decode";
 
 // Routes
 import Homepage from "./Homepage/Homepage";
@@ -9,7 +10,7 @@ import Login from "./Login/Login";
 import Account from "./User/Account";
 import NotFound from "./NotFound/NotFound";
 import AddGroceries from "./AddGroceries/AddGroceries";
-import decode from "jwt-decode";
+import MealPage from "./MealPage/MealPage";
 
 class Routes extends Component {
   render() {
@@ -42,6 +43,15 @@ class Routes extends Component {
                 id={props.match.params.userId}
                 {...this.props}
                 {...props}
+              />
+            )}
+          />
+          <Route
+            path="/:mealName/:mealId"
+            render={props => (
+              <MealPage
+                mealId={props.match.params.mealId}
+                cookies={this.props.cookies}
               />
             )}
           />

@@ -10,6 +10,13 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Groceries.associate = models => {
+    Groceries.belongsToMany(models.Meal, {
+      through: models.MealItems,
+      foreignKey: {
+        name: "itemId",
+        field: "item_id"
+      }
+    });
     Groceries.belongsToMany(models.List, {
       through: models.ListGroceries,
       foreignKey: {

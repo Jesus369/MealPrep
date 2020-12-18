@@ -2,15 +2,17 @@ export default `
     type Meal {
         id: ID!
         name: String!
-        photo: String!
-        calories: Int!
-        carbs: Int!
-        fat: Int!
-        protein: Int!
+        photo: String
+        calories: Int
+        carbs: Int
+        fat: Int
+        protein: Int
         users: [User!]!
+        groceries: [Groceries!]!
     }
 
     type Query {
+        getMeal(id: ID!): Meal!
         meals: [Meal!]!
     }
 

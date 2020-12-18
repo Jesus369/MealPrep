@@ -10,7 +10,13 @@ cloud.config({
 
 export default {
   Query: {
-    meals: async (parent, args, { models }) => await models.Meal.findAll()
+    meals: async (parent, args, { models }) => await models.Meal.findAll(),
+    getMeal: async (parent, args, { models }) => {
+      return await models.Meal.findOne({
+        include: [{ model: models.Groceries }],
+        where: { id: args.id }
+      });
+    }
   },
   Mutation: {
     addMeal: async (parent, args, { models }) => {

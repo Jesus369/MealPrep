@@ -85,7 +85,6 @@ const AddGroceries = ({ cookies } = this.props) => {
                 <li>{g.name} </li>
                 <li
                   onClick={() => {
-                    console.log("action fired");
                     addedGrocery({
                       variables: {
                         userId: userId,
@@ -101,7 +100,18 @@ const AddGroceries = ({ cookies } = this.props) => {
           : data.groceries.map(grocery => (
               <ul key={grocery.id}>
                 <li> {grocery.name} </li>
-                <li>Add Item</li>
+                <li
+                  onClick={() => {
+                    addedGrocery({
+                      variables: {
+                        userId: userId,
+                        itemId: parseInt(grocery.id)
+                      }
+                    });
+                  }}
+                >
+                  Add Item
+                </li>
               </ul>
             ))}
       </div>
