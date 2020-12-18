@@ -19,7 +19,7 @@ export default {
     }
   },
   Mutation: {
-    addMeal: async (parent, args, { models }) => {
+    createMeal: async (parent, args, { models }) => {
       try {
         await models.Meal.create({
           ...args

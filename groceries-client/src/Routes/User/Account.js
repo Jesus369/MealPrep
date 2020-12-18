@@ -48,7 +48,10 @@ const Account = (
       <div>
         <Header setCookies={cookies} />
         <div className="meals_container">
-          <Meals meals={data.user.meals} userId={parseInt(params.userId)} />
+          <Meals
+            meals={data.user.meals ? data.user.meals : 0}
+            userId={parseInt(params.userId)}
+          />
         </div>
 
         <div className="groceries_container">

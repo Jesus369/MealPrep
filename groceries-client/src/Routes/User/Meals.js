@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Meals = ({ meals, userId } = this.props) => {
-  console.log(meals.length);
-
   if (!meals || meals.length == 0) {
     return <div className="empty_meals">START ADDING MEALS TO COOK UP</div>;
   } else {

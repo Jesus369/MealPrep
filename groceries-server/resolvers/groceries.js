@@ -25,7 +25,7 @@ module.exports = {
           include: {
             model: models.List,
             as: "lists",
-            where: { name: "Primary" },
+            where: { name: "Vegan" },
             required: true
           },
           where: { id: args.userId },
@@ -40,9 +40,14 @@ module.exports = {
             itemId: args.itemId
           });
         } else {
-          await models.List.create({
-            name: "Primary",
+          const createdList = await models.List.create({
+            name: "Vegan",
             userId: args.userId
+          });
+
+          await models.ListGroceries.create({
+            listId: createdList.id,
+            itemId: args.itemId
           });
         }
 
