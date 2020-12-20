@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     calories: DataTypes.INTEGER,
     carbs: DataTypes.INTEGER,
     fat: DataTypes.INTEGER,
-    protien: DataTypes.INTEGER
+    protein: DataTypes.INTEGER,
+    sugar: DataTypes.INTEGER
   });
 
   Meal.associate = models => {

@@ -47,15 +47,30 @@ const Account = (
     return (
       <div>
         <Header setCookies={cookies} />
-        <div className="meals_container">
-          <Meals
-            meals={data.user.meals ? data.user.meals : 0}
-            userId={parseInt(params.userId)}
-          />
-        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            height: "90vh",
+            width: "100%"
+          }}
+        >
+          <div className="groceries_container">
+            <div>
+              <GroceryListDisplay
+                lists={data.user.lists}
+                userId={params.userId}
+              />
+            </div>
+          </div>
 
-        <div className="groceries_container">
-          <GroceryListDisplay lists={data.user.lists} userId={params.userId} />
+          <div className="meals_container">
+            <Meals
+              userIdProps={userId}
+              meals={data.user.meals ? data.user.meals : 0}
+              userId={parseInt(params.userId)}
+            />
+          </div>
         </div>
       </div>
     );

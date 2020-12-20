@@ -10,6 +10,6 @@ export default `
     }
 
     type Mutation {
-        userMealsMerge(user_id: Int!, meal_id: Int!): userMealRes!
+        addMealtoUser(userId: Int!, mealId: Int!): userMealRes!
     }
 `;

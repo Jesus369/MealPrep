@@ -7,6 +7,7 @@ export default `
         carbs: Int
         fat: Int
         protein: Int
+        sugar: Int
         users: [User!]!
         groceries: [Groceries!]!
     }
@@ -21,6 +22,6 @@ export default `
     }
 
     type Mutation {
-        createMeal(name: String!, photo: String!, calories: Int!, carbs: Int!, fat: Int!, protein: Int!): addMealRes!
+        createMeal(name: String!, photo: String!, calories: Int!, carbs: Int!, fat: Int!, protein: Int! sugar: Int!): addMealRes!
     }
 `;

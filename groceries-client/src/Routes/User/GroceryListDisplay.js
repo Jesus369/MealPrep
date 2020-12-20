@@ -5,9 +5,7 @@ import { gql, useQuery } from "@apollo/client";
 const GroceryListDisplay = ({ userId, lists } = this.props) => {
   if (!lists || lists.length === 0) {
     return (
-      <div className="empty_groceries">
-        YOU HAVE NO GROCERIES TO GO SHOP FOR
-      </div>
+      <div className="empty_groceries">YOU HAVEN'T CREATED A GROCERY LISTS</div>
     );
   } else {
     return (
