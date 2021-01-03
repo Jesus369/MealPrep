@@ -1,17 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 
-const ADD_NEW_MEAL = gql`
-  mutation ADD_NEW_MEAL($userId: Int!, $mealId: Int!) {
-    addMealtoUser(userId: $userId, mealId: $mealId) {
-      ok
-    }
-  }
-`;
-
-const CREATE_MEAL = gql`
-  mutation CREATE_MEAL(
+const NEW_CUSTOM_MEAL = gql`
+  mutation NEW_CUSTOM_MEAL(
     $name: String!
     $photo: String!
     $calories: Int!
@@ -19,8 +10,9 @@ const CREATE_MEAL = gql`
     $fat: Int!
     $protein: Int!
     $sugar: Int!
+    $userId: Int
   ) {
-    createMeal(
+    createCustomMeal(
       name: $name
       photo: $photo
       calories: $calories
@@ -28,29 +20,14 @@ const CREATE_MEAL = gql`
       fat: $fat
       protein: $protein
       sugar: $sugar
+      userId: $userId
     ) {
       ok
     }
   }
 `;
-
-// Empty Meals Component
-const EmptyMeals = ({ renderChange } = this.props) => {
-  return (
-    <div className="empty_meals">
-      <span
-        onClick={() => {
-          renderChange({ renderedState: "add" });
-        }}
-      >
-        Add A Meal
-      </span>
-    </div>
-  );
-};
-
 // Meal Form Component
-const NewMeal = ({ renderChange, userId } = this.props) => {
+const NewCustomMeal = ({ renderChange, userId } = this.props) => {
   const [meal, mealInput] = useState({
     name: "",
     photo: "",
@@ -64,7 +41,7 @@ const NewMeal = ({ renderChange, userId } = this.props) => {
 
   const { name, photo, calories, carbs, fat, protein, sugar } = meal;
 
-  const [createMeal, { newMealData }] = useMutation(CREATE_MEAL);
+  const [createCustomMeal, { customMealData }] = useMutation(NEW_CUSTOM_MEAL);
 
   const changeMealData = e => {
     const { name, value } = e.target;
@@ -90,7 +67,7 @@ const NewMeal = ({ renderChange, userId } = this.props) => {
         <form
           className="new-meal-form"
           onSubmit={e => {
-            createMeal({
+            createCustomMeal({
               variables: {
                 name: name,
                 photo: photo,
@@ -99,6 +76,7 @@ const NewMeal = ({ renderChange, userId } = this.props) => {
                 fat: parseInt(fat),
                 protein: parseInt(protein),
                 sugar: parseInt(sugar),
+                userId: parseInt(userId),
                 newMeal: true
               }
             });
@@ -155,37 +133,4 @@ const NewMeal = ({ renderChange, userId } = this.props) => {
   );
 };
 
-const Meals = ({ meals, userIdProps } = this.props) => {
-  const [rendered, changeRender] = useState({
-    renderedState: "empty"
-  });
-  const [addMealtoUser, { addedMealData }] = useMutation(ADD_NEW_MEAL);
-
-  if (!meals || meals.length == 0) {
-    return (
-      <div>
-        {rendered.renderedState === "empty" ? (
-          <EmptyMeals renderChange={changeRender} />
-        ) : (
-          <NewMeal userId={userIdProps} renderChange={changeRender} />
-        )}
-      </div>
-    );
-  } else {
-    return (
-      <div className="meals_listing">
-        {meals.map(m => (
-          <ul className="meal">
-            <li>{m.photo}</li>
-            <li>{m.name}</li>
-          </ul>
-        ))}
-        <div>
-          <Link to={"/groceries/" + userIdProps}>Add new tab</Link>
-        </div>
-      </div>
-    );
-  }
-};
-
-export default Meals;
+export default NewCustomMeal;

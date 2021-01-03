@@ -3,23 +3,17 @@
 }
 
 .meals_container > div {
-  background-color: red;
   font-family: "Klavika";
   text-align: center;
-  /* position: absolute;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%; */
-}
-
-.empty_meals > span {
-  font-size: 2em;
   position: absolute;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
+}
+
+.empty_meals > span {
+  font-size: 2em;
 }
 
 .add_meals > span {
@@ -60,13 +54,9 @@
 }
 
 .empty_groceries {
+  font-size: 1.5em;
+  margin-top: 1em;
   text-align: center;
-  /* position: absolute;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%; */
-  font-size: 2em;
 }
 
 .groceries_container > div {
@@ -77,12 +67,6 @@
   width: 80%;
   margin: 0 auto 0 auto;
   text-align: center;
-  /* position: absolute;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  width: 100%; */
 }
 
 .groceries_prelist > ul {
@@ -91,4 +75,65 @@
   padding: 0em;
   font-size: 1.2em;
   font-family: "Gill Sans";
+}
+
+/* Meals NewMeal */
+.cancel-meal {
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  display: inline-block;
+  width: 10px;
+  margin: 0;
+  padding: 10px;
+}
+
+.new-meal-container {
+  background-color: #b9fbc4;
+  border-radius: 1em;
+  height: 60vh;
+  width: 60vh;
+}
+
+.new-meal-container > div {
+  width: 50%;
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+.new-meal-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-meal-form > span {
+  color: rgb(73, 73, 73);
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+.new-meal-form > input {
+  background-color: #b9fbc4;
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 15px;
+  padding: 7px;
+  margin-bottom: 10px;
+}
+
+.new-meal-form > input:focus {
+  outline: none;
+}
+
+.submit-meal {
+  background-color: rgb(250, 250, 250);
+  border: none;
+  font-size: 15px;
+  margin-top: 1em;
+  padding: 1em;
 }

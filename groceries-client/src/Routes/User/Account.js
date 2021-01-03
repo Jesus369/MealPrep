@@ -6,7 +6,7 @@ import { gql, useQuery } from "@apollo/client";
 import Header from "../../Components/Header";
 import GroceryListDisplay from "./GroceryListDisplay";
 import Calendar from "./Calendar";
-import Meals from "./Meals";
+import Meals from "./MealsComponent/Meals";
 
 import "./Styles/styles.css";
 

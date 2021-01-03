@@ -15,6 +15,7 @@ export default `
     type Query {
         getMeal(id: ID!): Meal!
         meals: [Meal!]!
+        randomMeals: [Meal!]!
     }
 
     type addMealRes {
@@ -23,5 +24,7 @@ export default `
 
     type Mutation {
         createMeal(name: String!, photo: String!, calories: Int!, carbs: Int!, fat: Int!, protein: Int! sugar: Int!): addMealRes!
+        createCustomMeal(name: String!, photo: String!, calories: Int!, carbs: Int!, fat: Int!, protein: Int! sugar: Int!, userId: Int!): addMealRes!
+
     }
 `;
